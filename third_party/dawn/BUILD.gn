@@ -408,7 +408,7 @@ static_library("libdawn_native") {
                     "$dawn_root")
   }
 
-  configs -= [ "//gn:warnings" ]
+  # configs -= [ "//gn:warnings" ]
   if (dawn_enable_vulkan) {
     configs += [ "//:our_vulkan_headers" ]
     include_dirs = [ "../.." ]  # for "include/third_party/vulkan/vulkan/vk_platform.h" in vulkan.h

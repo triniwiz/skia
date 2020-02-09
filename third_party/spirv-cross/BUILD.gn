@@ -10,7 +10,7 @@ config("spirv_cross_config") {
 
 static_library("spirv_cross") {
   public_configs = [ ":spirv_cross_config" ]
-  configs -= [ "//gn:warnings" ]
+  # configs -= [ "//gn:warnings" ]
 
   cflags = []
   if (is_win) {
