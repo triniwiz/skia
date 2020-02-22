@@ -18,6 +18,7 @@ if (skia_enable_skparagraph) {
 
   component("skparagraph") {
     import("skparagraph.gni")
+    complete_static_lib = false
     public_configs = [ ":public_config" ]
     public = skparagraph_public
     if (skia_use_icu && skia_use_harfbuzz) {
