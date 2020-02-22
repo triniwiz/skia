@@ -22,6 +22,7 @@ if (skia_enable_skshaper) {
   }
 
   component("skshaper") {
+    complete_static_lib = false
     check_includes = false
     import("skshaper.gni")
     public_configs = [ ":public_config" ]
