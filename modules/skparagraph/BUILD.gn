@@ -18,6 +18,7 @@ if (skia_enable_skparagraph) {
   }
 
   component("skparagraph") {
+    complete_static_lib = false
     import("skparagraph.gni")
     public_configs = [ ":public_config" ]
     public = skparagraph_public
