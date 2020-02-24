@@ -1209,12 +1209,13 @@ static_library("pathkit") {
 }
 
 group("modules") {
-  deps = [
-    "modules/particles",
-    "modules/skottie",
-    "modules/skparagraph",
-    "modules/skshaper",
-  ]
+  # rust-skia: HACK: only add modules/skparagraph if we do use icu for now, 
+  # this prevents a linker error on macOS
+  if (skia_use_icu) {
+    deps = [ "modules/skparagraph" ]
+  } else {
+    deps = []
+  }
 }
 
 # Targets guarded by skia_enable_tools may use //third_party freely.
