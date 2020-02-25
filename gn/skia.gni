@@ -87,6 +87,9 @@ declare_args() {
   } else {
     skia_use_vulkan = false
   }
+
+  # rust-skia args
+  skia_enable_skottie = false
 }
 
 declare_args() {
