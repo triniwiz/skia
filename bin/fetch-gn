@@ -28,7 +28,7 @@ with open(gnzip, 'wb') as f:
   url = 'https://chrome-infra-packages.appspot.com/dl/gn/gn/{}/+/git_revision:{}'.format(pkg,rev)
   f.write(urlopen(url).read())
 
-gn = 'gn.exe' if 'win32' in sys.platform else 'gn'
+gn = 'gn.exe' if 'win32' in sys.platform or 'msys' in sys.platform else 'gn'
 with zipfile.ZipFile(gnzip, 'r') as f:
   f.extract(gn, 'bin')
 
