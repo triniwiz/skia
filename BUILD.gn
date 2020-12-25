@@ -789,6 +789,12 @@ optional("gpu") {
 
   sources =
       skia_gpu_sources + skia_sksl_gpu_sources + skia_gpu_processor_outputs
+
+  # rust-skia
+  if (skia_enable_rust_bindings) {
+    sources += [ "../src/gpu.cpp" ]
+  }
+
   if (!skia_enable_ccpr) {
     sources -= skia_ccpr_sources
     sources += [ "src/gpu/ccpr/GrCoverageCountingPathRenderer_none.cpp" ]
@@ -803,6 +809,12 @@ optional("gpu") {
 
   if (skia_use_gl) {
     public_defines += [ "SK_GL" ]
+
+    # rust-skia
+    if (skia_enable_rust_bindings) {
+      sources += [ "../src/gl.cpp" ]
+    }
+
     if (is_android) {
       sources += [ "src/gpu/gl/egl/GrGLMakeNativeInterface_egl.cpp" ]
 
@@ -835,6 +847,12 @@ optional("gpu") {
 
   if (skia_use_vulkan) {
     public_defines += [ "SK_VULKAN" ]
+
+    # rust-skia
+    if (skia_enable_rust_bindings) {
+      sources += [ "../src/vulkan.cpp" ]
+    }
+
     if (skia_use_vma) {
       deps += [ "third_party/vulkanmemoryallocator" ]
     }
@@ -884,6 +902,12 @@ optional("gpu") {
       "//third_party/d3d12allocator",
       "//third_party/spirv-cross:spirv_cross",
     ]
+
+    # rust-skia
+    if (skia_enable_rust_bindings) {
+      sources += [ "../src/d3d.cpp" ]
+    }
+
     sources += skia_direct3d_sources
     if (skia_enable_direct3d_debug_layer) {
       public_defines += [ "SK_ENABLE_D3D_DEBUG_LAYER" ]
@@ -897,6 +921,12 @@ optional("gpu") {
 
   cflags_objcc = []
   if (skia_use_metal) {
+
+    # rust-skia
+    if (skia_enable_rust_bindings) {
+      sources += [ "../src/metal.cpp" ]
+    }
+
     public_defines += [ "SK_METAL" ]
     sources += skia_metal_sources
     frameworks += [ "Metal.framework" ]
@@ -1199,6 +1229,15 @@ component("skia") {
   public += skia_effects_imagefilter_public
 
   sources = []
+
+  # rust-skia
+  if (skia_enable_rust_bindings) {
+    sources += [ 
+      "../src/bindings.cpp",
+      "../src/svg.cpp",
+    ]
+  }
+
   sources += skia_core_sources
   sources += skia_utils_sources
   sources += skia_effects_sources

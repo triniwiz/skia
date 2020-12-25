@@ -25,6 +25,15 @@ if (skia_enable_skparagraph && skia_enable_skshaper && skia_use_icu &&
     public_configs = [ ":public_config" ]
     public = skparagraph_public
     sources = skparagraph_sources
+
+    # rust-skia
+    if (skia_enable_rust_bindings) {
+      sources += [
+        "../../../src/shaper.cpp",
+        "../../../src/paragraph.cpp"
+      ]
+    }
+
     deps = [
       "../..:skia",
       "../skshaper",

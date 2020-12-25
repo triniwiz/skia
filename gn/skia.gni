@@ -99,6 +99,7 @@ declare_args() {
   skia_use_libfuzzer_defaults = true
   # rust-skia args
   skia_enable_skottie = false
+  skia_enable_rust_bindings = false
 }
 
 declare_args() {
