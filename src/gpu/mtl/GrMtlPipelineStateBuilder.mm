@@ -505,7 +505,12 @@ GrMtlPipelineState* GrMtlPipelineStateBuilder::finalize(GrRenderTarget* renderTa
 
     NSError* error = nil;
 #if GR_METAL_SDK_VERSION >= 230
-    if (@available(macOS 11.0, iOS 14.0, *)) {
+
+    // rust-skia: As long our build platforms are on macOS 10, we can't support
+    // macOS 11 @available checks yet, which fail with a
+    // __isPlatformVersionAtLeast linker error.
+
+    if (false /* @available(macOS 11.0, iOS 14.0, *) */) {
         id<MTLBinaryArchive> archive = fGpu->binaryArchive();
         if (archive) {
             NSArray* archiveArray = [NSArray arrayWithObjects:archive, nil];
